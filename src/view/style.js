@@ -10,6 +10,7 @@ export const Container = styled.View`
 export const Header = styled.Text`
   font-size: 25;
   font-weight: bold;
+  padding-bottom: 20;
 `
 export const Row = styled.View`
   flex: 1;
@@ -22,13 +23,11 @@ export const SpaceAroundRow = Row.extend`
 export const Board = styled.View`
   flex: 1;
   flex-direction: column;
-  max-height: 350;
 `
 const Square = styled.View`
   border: gray;
-  position: relative;
-  width: 50;
   height: 50;
+  width: 50;
 `
 export const Cross = styled.Text`
   position: absolute;
@@ -46,4 +45,10 @@ export const White = Square.extend`
 `
 export const Red = Square.extend`
   background: red;
+`
+export const BodyText = styled.Text`
+  padding-top: 10;
+  padding-bottom: 10;
+  padding-left: 5;
+  font-size: 20;
 `

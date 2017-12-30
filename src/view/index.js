@@ -4,7 +4,7 @@ import {Button, Text, TouchableHighlight, View} from 'react-native'
 
 import {selectUser, toggleSquare} from '../actions'
 
-import {Board, Container, Cross, Header, Row, Black, White, Red, SpaceAroundRow} from './style'
+import {Board, BodyText, Container, Cross, Header, Row, Black, White, Red, SpaceAroundRow} from './style'
 import {PTS, BoardModel} from '../reducer/board-model'
 
 export const MainView = ({
@@ -48,23 +48,23 @@ export const MainView = ({
           </Row>
         ))}
       </Board>
-      <Text>Selection: {activeUser}</Text>
+      <BodyText>Selection: {activeUser}</BodyText>
       <SpaceAroundRow>
         <View>
           <Button title="1" onPress={selectUser1} />
-          <Text>{points[1]}</Text>
+          <BodyText>{points[1]}</BodyText>
         </View>
         <View>
           <Button title="2" onPress={selectUser2} />
-          <Text>{points[2]}</Text>
+          <BodyText>{points[2]}</BodyText>
         </View>
         <View>
           <Button title="3" onPress={selectUser3} />
-          <Text>{points[3]}</Text>
+          <BodyText>{points[3]}</BodyText>
         </View>
         <View>
           <Button title="4" onPress={selectUser4} />
-          <Text>{points[4]}</Text>
+          <BodyText>{points[4]}</BodyText>
         </View>
       </SpaceAroundRow>
     </Container>
