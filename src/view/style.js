@@ -19,19 +19,22 @@ export const Row = styled.View`
 export const SpaceAroundRow = Row.extend`
   width: 100%;
   justify-content: space-around;
+  max-height: 20%;
 `
 export const Board = styled.View`
   flex: 1;
   flex-direction: column;
+  max-height: 356;
 `
 const Square = styled.View`
   border: gray;
   height: 50;
+  position: relative;
   width: 50;
 `
 export const Cross = styled.Text`
   position: absolute;
-  top: 2;
+  top: 0;
   left: 15;
   font-size: 40;
   font-weight: bold;
