@@ -1,4 +1,4 @@
-import {SELECT_USER, TOGGLE_SQUARE} from '../actions'
+import {SELECT_USER, TOGGLE_SQUARE, CLOSE_ROUND} from '../actions'
 import {PTS, BoardModel} from './board-model'
 
 const pointsDefault = () => ({
@@ -8,22 +8,33 @@ const pointsDefault = () => ({
   4: {}
 })
 
+const emptySelections = () => ({
+  0: {},
+  1: {},
+  2: {},
+  3: {},
+  4: {},
+  5: {},
+  6: {}
+})
+
 const defaultState = {
   activeUser: 1,
-  selections: {
-    0: {},
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {}
-  },
+  selections: emptySelections(),
   points: {
     1: 0,
     2: 0,
     3: 0,
     4: 0
+  },
+  rounds: {
+    history: [],
+    total: {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0
+    }
   }
 }
 
@@ -114,6 +125,14 @@ const countPoints = selections => {
   }
 }
 
+const countTotal = (player, history) => {
+  let total = 0
+  for (const i = 0; i < history.length; i++) {
+    total += history[i][player]
+  }
+  return total
+}
+
 export default (state = defaultState, action) => {
   switch (action.type) {
     case SELECT_USER: {
@@ -132,6 +151,15 @@ export default (state = defaultState, action) => {
         selections,
         points
       }
+    }
+    case CLOSE_ROUND: {
+      const rounds = {...state.rounds}
+      rounds.history = [...rounds.history, state.points]
+      rounds.total[1] = countTotal(1, rounds.history)
+      rounds.total[2] = countTotal(2, rounds.history)
+      rounds.total[3] = countTotal(3, rounds.history)
+      rounds.total[4] = countTotal(4, rounds.history)
+      return {...state, rounds, selections: emptySelections()}
     }
     default: {
       return state

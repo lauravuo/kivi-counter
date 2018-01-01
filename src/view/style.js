@@ -20,6 +20,14 @@ export const Container = styled.View`
   background-color: darkgray;
   align-items: center;
   justify-content: center;
+  width: 100%;
+`
+export const Scroll = styled.ScrollView`
+  width: 100%;
+`
+export const ScrollContainer = styled.View`
+  align-items: center;
+  justify-content: center;
 `
 export const Header = styled.Text`
   font-size: 25;
@@ -27,16 +35,13 @@ export const Header = styled.Text`
   padding-bottom: 20;
 `
 export const Row = styled.View`
-  flex: 1;
   flex-direction: row;
 `
 export const SpaceAroundRow = Row.extend`
   width: 100%;
   justify-content: space-around;
-  max-height: 20%;
 `
 export const Board = styled.View`
-  flex: 1;
   flex-direction: column;
   max-height: 356;
 `
@@ -67,8 +72,8 @@ export const Red = Square.extend`
   background: red;
 `
 export const BodyText = styled.Text`
-  padding-top: 10;
-  padding-bottom: 10;
+  padding-top: 20;
+  padding-bottom: 20;
   padding-left: 5;
   font-size: 20;
   text-align: center;
