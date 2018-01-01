@@ -1,5 +1,19 @@
 import styled from 'styled-components/native'
 
+const playerColor = props => {
+  switch (props.player) {
+    case 1:
+      return 'cyan'
+    case 2:
+      return 'blue'
+    case 3:
+      return 'ivory'
+    case 4:
+      return 'green'
+  }
+  return 'black'
+}
+
 export const Container = styled.View`
   flex: 1;
   padding-top: 50;
@@ -38,7 +52,10 @@ export const Cross = styled.Text`
   left: 15;
   font-size: 40;
   font-weight: bold;
-  color: gray;
+  color: ${playerColor};
+  text-shadow-color: black;
+  text-shadow-offset: 1px 1px;
+  text-shadow-radius: 1;
 `
 export const Black = Square.extend`
   background: black;
@@ -54,4 +71,6 @@ export const BodyText = styled.Text`
   padding-bottom: 10;
   padding-left: 5;
   font-size: 20;
+  text-align: center;
+  color: ${playerColor};
 `

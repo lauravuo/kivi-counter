@@ -1,6 +1,6 @@
 # Expo Kivi-counter-app
 
-App calculates points for Kivi board game.
+App calculates player scores for Kivi board game.
 
 ## Setup
 

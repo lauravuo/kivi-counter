@@ -40,6 +40,7 @@ const squarePoints = square => {
   }
 }
 
+// TODO: optimize
 const calcPoints = (selections, rowMode) => {
   const resetTemp = () => ({
     factor: 0,
