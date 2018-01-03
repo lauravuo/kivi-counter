@@ -24,9 +24,10 @@
     "format": "prettier-eslint --write \"**/*.js\"",
     "lint": "eslint **/*.js",
     "publish": "exp publish",
-    "test": "node node_modules/jest/bin/jest.js --watch"
+    "test:unit": "jest ./src --coverage --bail"
   },
   "jest": {
+    "testRegex": ".*\\.test\\.js$",
     "preset": "jest-expo"
   },
   "dependencies": {
