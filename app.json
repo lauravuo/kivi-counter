@@ -3,6 +3,7 @@
     "name": "kivi-counter",
     "sdkVersion": "23.0.0",
     "orientation": "portrait",
-    "githubUrl": "https://github.com/lvuoren/kivi-counter"
+    "githubUrl": "https://github.com/lvuoren/kivi-counter",
+    "privacy": "public"
   }
 }
