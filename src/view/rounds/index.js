@@ -11,7 +11,7 @@ const winnerCount = rounds => {
   return winner
 }
 
-const Rounds = ({rounds, closeActiveRound}) => {
+const Rounds = ({rounds, closeActiveRound, closeActiveGame}) => {
   const winnerTotal = winnerCount(rounds)
   return (
     <Container>
@@ -42,6 +42,7 @@ const Rounds = ({rounds, closeActiveRound}) => {
               </View>
             ))}
           </RoundRow>
+          <Button title="Close game" onPress={closeActiveGame} />
         </RoundsContainer>
       )}
     </Container>

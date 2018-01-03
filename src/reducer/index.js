@@ -1,4 +1,4 @@
-import {SELECT_USER, TOGGLE_SQUARE, CLOSE_ROUND} from '../actions'
+import {SELECT_USER, TOGGLE_SQUARE, CLOSE_ROUND, CLOSE_GAME} from '../actions'
 
 import calculate from './calculate'
 
@@ -19,14 +19,16 @@ const emptySelections = () => ({
   6: {}
 })
 
+const roundsDefault = () => ({
+  history: [],
+  total: pointsDefault()
+})
+
 const defaultState = {
   activeUser: 1,
   selections: emptySelections(),
   points: pointsDefault(),
-  rounds: {
-    history: [],
-    total: pointsDefault()
-  }
+  rounds: roundsDefault()
 }
 
 const countTotal = (player, history) => {
@@ -65,6 +67,8 @@ export default (state = defaultState, action) => {
       rounds.total[4] = countTotal(4, rounds.history)
       return {...state, rounds, selections: emptySelections(), points: pointsDefault()}
     }
+    case CLOSE_GAME:
+      return {...state, rounds: roundsDefault()}
     default: {
       return state
     }

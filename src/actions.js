@@ -1,6 +1,7 @@
 export const SELECT_USER = 'SELECT_USER'
 export const TOGGLE_SQUARE = 'TOGGLE_SQUARE'
 export const CLOSE_ROUND = 'CLOSE_ROUND'
+export const CLOSE_GAME = 'CLOSE_GAME'
 
 export const selectUser = payload => ({
   type: SELECT_USER,
@@ -14,4 +15,8 @@ export const toggleSquare = payload => ({
 
 export const closeRound = () => ({
   type: CLOSE_ROUND
+})
+
+export const closeGame = () => ({
+  type: CLOSE_GAME
 })

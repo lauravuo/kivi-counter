@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {selectUser, toggleSquare, closeRound} from '../actions'
+import {selectUser, toggleSquare, closeRound, closeGame} from '../actions'
 import Rounds from './rounds'
 import Board from './board'
 import PlayerSelection from './player-selection'
@@ -12,6 +12,7 @@ export const MainView = ({
   selectActiveUser,
   toggleActiveSquare,
   closeActiveRound,
+  closeActiveGame,
   activeUser,
   selections,
   points,
@@ -27,7 +28,11 @@ export const MainView = ({
           selectActiveUser={selectActiveUser}
           activeUser={activeUser}
         />
-        <Rounds rounds={rounds} closeActiveRound={closeActiveRound} />
+        <Rounds
+          rounds={rounds}
+          closeActiveRound={closeActiveRound}
+          closeActiveGame={closeActiveGame}
+        />
       </ScrollContainer>
     </Scroll>
   </Container>
@@ -43,7 +48,8 @@ const mapStateToProps = ({activeUser, selections, points, rounds}) => ({
 const mapDispatchToProps = dispatch => ({
   selectActiveUser: number => dispatch(selectUser(number)),
   toggleActiveSquare: (row, square) => dispatch(toggleSquare({row, square})),
-  closeActiveRound: () => dispatch(closeRound())
+  closeActiveRound: () => dispatch(closeRound()),
+  closeActiveGame: () => dispatch(closeGame())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView)
