@@ -1,11 +1,12 @@
 import {SELECT_USER, TOGGLE_SQUARE, CLOSE_ROUND} from '../actions'
-import {PTS, BoardModel} from './board-model'
+
+import calculate from './calculate'
 
 const pointsDefault = () => ({
-  1: {},
-  2: {},
-  3: {},
-  4: {}
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0
 })
 
 const emptySelections = () => ({
@@ -21,107 +22,10 @@ const emptySelections = () => ({
 const defaultState = {
   activeUser: 1,
   selections: emptySelections(),
-  points: {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0
-  },
+  points: pointsDefault(),
   rounds: {
     history: [],
-    total: {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0
-    }
-  }
-}
-
-const squarePoints = square => {
-  switch (square) {
-    case PTS.WE:
-      return 1
-    case PTS.BK:
-      return 2
-    case PTS.RD:
-      return 3
-    default:
-      return 0
-  }
-}
-
-// TODO: optimize
-const calcPoints = (selections, rowMode) => {
-  const resetTemp = () => ({
-    factor: 0,
-    current: 0,
-    singleSquare: null
-  })
-  const points = pointsDefault()
-  for (let player = 1; player < 5; player++) {
-    let total = 0
-    const singleSquares = []
-    let temp = resetTemp()
-    const sumPoints = () => {
-      if (temp.factor > 0) {
-        total += temp.factor > 1 ? temp.factor * temp.current : 0
-        if (temp.factor === 1) {
-          singleSquares.push({...temp.singleSquare})
-        }
-        temp = resetTemp()
-      }
-    }
-    for (let i = 0; i < BoardModel.length; i++) {
-      for (let j = 0; j < BoardModel[i].length; j++) {
-        const first = rowMode ? i : j
-        const second = rowMode ? j : i
-        const singlePoints = squarePoints(BoardModel[first][second])
-        const squareValue = selections[first][second]
-        if (squareValue === player) {
-          temp.factor++
-          temp.current += singlePoints
-          temp.singleSquare = {first, second}
-        } else {
-          sumPoints()
-        }
-      }
-      sumPoints()
-    }
-    points[player].total = total
-    points[player].singles = singleSquares
-  }
-  return points
-}
-
-const countSingleSquares = (horizontal, vertical) => {
-  const points = pointsDefault()
-  for (let player = 1; player < 5; player++) {
-    let total = 0
-    for (let i = 0; i < horizontal[player].singles.length; i++) {
-      const horizontalItem = horizontal[player].singles[i]
-      if (
-        vertical[player].singles.find(
-          item => item.first === horizontalItem.first && item.second === horizontalItem.second
-        )
-      ) {
-        total += squarePoints(BoardModel[horizontalItem.first][horizontalItem.second])
-      }
-    }
-    points[player].total = total
-  }
-  return points
-}
-
-const countPoints = selections => {
-  const horizontalPoints = calcPoints(selections, true)
-  const verticalPoints = calcPoints(selections, false)
-  const singles = countSingleSquares(horizontalPoints, verticalPoints)
-  return {
-    1: horizontalPoints[1].total + verticalPoints[1].total + singles[1].total,
-    2: horizontalPoints[2].total + verticalPoints[2].total + singles[2].total,
-    3: horizontalPoints[3].total + verticalPoints[3].total + singles[3].total,
-    4: horizontalPoints[4].total + verticalPoints[4].total + singles[4].total
+    total: pointsDefault()
   }
 }
 
@@ -145,7 +49,7 @@ export default (state = defaultState, action) => {
       const selections = {...state.selections}
       const current = selections[action.payload.row][action.payload.square]
       selections[action.payload.row][action.payload.square] = current ? null : state.activeUser
-      const points = countPoints(selections)
+      const points = calculate(selections)
       return {
         ...state,
         selections,
@@ -159,7 +63,7 @@ export default (state = defaultState, action) => {
       rounds.total[2] = countTotal(2, rounds.history)
       rounds.total[3] = countTotal(3, rounds.history)
       rounds.total[4] = countTotal(4, rounds.history)
-      return {...state, rounds, selections: emptySelections()}
+      return {...state, rounds, selections: emptySelections(), points: pointsDefault()}
     }
     default: {
       return state
