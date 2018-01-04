@@ -5,9 +5,9 @@ import {BoldText, Container, RoundsContainer, RoundRow, RoundText, WinnerOverlay
 
 const winnerCount = rounds => {
   let winner = rounds.total[1]
-  winner = rounds.total[2] > rounds.total[1] ? rounds.total[2] : winner
-  winner = rounds.total[3] > rounds.total[2] ? rounds.total[3] : winner
-  winner = rounds.total[4] > rounds.total[3] ? rounds.total[4] : winner
+  winner = rounds.total[2] > winner ? rounds.total[2] : winner
+  winner = rounds.total[3] > winner ? rounds.total[3] : winner
+  winner = rounds.total[4] > winner ? rounds.total[4] : winner
   return winner
 }
 

@@ -32,5 +32,5 @@ export const ScrollContainer = styled.View`
 export const Header = styled.Text`
   font-size: 25;
   font-weight: bold;
-  padding-bottom: 20;
+  padding-bottom: 10;
 `
