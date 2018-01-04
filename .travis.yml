@@ -1,0 +1,6 @@
+language: node_js
+
+script:
+  - npm test
+  - exp login -u $EXP_USER -p $EXP_PASSWORD
+  - exp publish --non-interactive
